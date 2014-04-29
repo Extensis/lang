@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-FILE VERSION: 1.23
+FILE VERSION: 1.24
 
 Copyright 2011-2014, Celartem, Inc. dba Extensis.
 
@@ -13,20 +13,6 @@ Copyright 2011-2014, Celartem, Inc. dba Extensis.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-A NOTE ON SOURCES:
-
-The first versions of this file used data primarily from two other open source projects: 
-Fontaine and SpeakEasy. Although we have expanded far from these original sources, we 
-appreciate their initial work which was a big leg up for us.
-
-Fontaine is an open source font-language analysis program by Ed Trager, first posted on SourceForge in March 2009, including language data files. We used its files as a starting point for many of our language definitions. http://fontaine.sourceforge.net/
-
-Speakeasy is another open source font-language analysis tool, this one by the good folks 
-at Typekit, first posted on GitHub in October 2010. Speakeasy attempts to be very minimal 
-in declaring what constitutes language support. We are a bit more extravagant, expecting 
-things like basic punctuation required for the language to be present. 
-https://github.com/typekit/speakeasy
 
 NOTES ON CONSTRUCTION:
 1. Language name attribute values are case-sensitive and must be unique.
@@ -41,7 +27,7 @@ NOTES ON CONSTRUCTION:
 6. Where possible, language abbreviated names come from: 
    http://www.microsoft.com/typography/developers/opentype/languagetags.aspx.
 
-USEFUL FURTHER SOURCES:
+USEFUL SOURCES:
 1. For Latin and Cyrillic based languages, the eki.ee letter databases are fabulous!
    http://www.eki.ee/letter/
 2. Unicode consortium code charts. Note especially that besides letters or ideographs 
@@ -68,7 +54,14 @@ Ukrainian now has "parent=Russian" instead of "parent=Cyrillic" (smaller charact
 v1.22  2014-02-21  Added many characters to erroneous Slovak definition.
 deleted erroneous 0x0115 (lower case e with breve) from Adobe Latin 3 definition
 
-v1.23 2014-03-13  Added note on sources.
+v1.23  2014-03-31  Removed unnecessary scanning-codepoints block in Serbo-CroatianCyrillic definition.
+
+v1.24  2014-04-21  Removed empty blocks as Extensis infrastructure no longer requires 
+them. Updated definitions of Adobe Latin 1 to 5 and Adobe Cyrillic 1 to 3 character sets 
+to match latest Adobe usage, as seen in the FontLab .enc files made here: 
+https://github.com/tphinney/font-tools
+Also added new currency symbols to various subsetting definitions, especially
+various Cyrillic and Indian writing systems. (Tenge, turgrik, ruble, hryvni, rupee....)
 
 -->
 
@@ -89,38 +82,50 @@ v1.23 2014-03-13  Added note on sources.
 	
 	<language name="AdobeCyrillic1" abbreviated-name="AC1" anglicized-name="Adobe Cyrillic 1" parent="Cyrillic">
 		<scanning-codepoints>
-			0x0020,0x0401-0x040C,0x040E,0x0451-0x045C,0x045E,0x045F,0x0490,0x0491
+			0x0020,0x0401-0x040C,0x040E,0x0451-0x045C,0x045E,0x0490,0x0491
 		</scanning-codepoints>
 		<subsetting-codepoints>
+			0x0400,
+			0x040D,
+			0x040F,
+			0x0450,
+			0x045D,
+			0x045F,
 			0x0462, <!-- cap yat, obsolescent -->
 			0x0463, <!-- lc yat, obsolescent -->
 			0x0472-0x0475, <!-- fita and izhitsa, obsolescent -->
 			0x04D9, <!-- lower-case schwa, not really standard -->
-			0x2010,  <!-- proper hyphen, not to be confused with ASCII hyphen 0x002D -->
-			0x20B4  <!-- Ukrianian hryvni currency symbol -->
+			0x2010, <!-- proper hyphen, not to be confused with ASCII hyphen 0x002D -->
+			0x20B4, <!-- Ukrianian hryvni currency symbol -->
+			0x20BD, <!-- Russian ruble currency symbol -->
+			0x2116  <!-- numero symbol -->
 		</subsetting-codepoints>
 	</language>
 	
 	<language name="AdobeCyrillic2" abbreviated-name="AC2" anglicized-name="Adobe Cyrillic 2" parent="AdobeCyrillic1">
 		<scanning-codepoints>
-			0x0492,0x0493,0x0496,0x0497,0x049A,0x049B,0x04A2,0x04A3,0x04AE-0x04B3,0x04B6,0x04B7,0x04BA,0x04BB,0x04C0,0x04D8,0x04E2,0x04E3,0x04E8,0x04E9,0x04EE,0x04EF
+			0x0400,0x040D,0x040F,0x0450,0x045F,0x0472-0x0475,0x0490-0x0493,0x0496-0x049B,0x04A0-0x04A3,
+			0x04AE-0x04B3,0x04B6,0x04B7,0x04BA,0x04BB,0x04C0-0x04C2,0x04D0,0x04D1,0x04D4-0x04D9,0x04E2,
+			0x04E3,0x04E6-0x04E9,0x04EE,0x04EF,0x04F2,0x04F3,0x2116
 		</scanning-codepoints>
 		<subsetting-codepoints>
-			0x04CF <!-- lowercase palochka, not in common use -->
+			0x04CF, <!-- lowercase palochka, not in common use -->
+			0x20AE, <!-- Mongolian tugrik currency symbol -->
+			0x20B4, <!-- Ukrianian hryvni currency symbol -->
+			0x20BD, <!-- Russian ruble currency symbol -->
+			0x2116  <!-- numero symbol -->
 		</subsetting-codepoints>
 	</language>
 	
 	<language name="AdobeCyrillic3" abbreviated-name="AC3" anglicized-name="Adobe Cyrillic 3" parent="AdobeCyrillic2">
 		<scanning-codepoints>
-			0x02BC,0x0498,0x0499,0x049C,0x049D,0x04A0,0x04A1,0x04AA,0x04AB,0x04B8,0x04B9,0x04C1,0x04C2,0x04D0,0x04D1,
-			0x04D4-0x04D7, <!-- 04D4 & 04D5 needed for Ossetic -->
-			0x04E6,0x04E7,0x04F2,0x04F3
+			0x0494,0x0495,0x049C-0x049F,0x04A4-0x04AD,0x04B4,0x04B5,0x04B8,0x04B9,0x04BC,0x04BD,
+			0x04CB,0x04CC,0x04D2,0x04D3,0x04DC-0x04E1,0x04E4,0x04E5,0x04F0,0x04F1,0x04F4-0x04F9,
+			0x051A-0x051D,0x0524,0x0525
 		</scanning-codepoints>
 		<subsetting-codepoints>
 			0x04BE, <!-- abkhazian Che -->
-			0x04BF, <!-- abkhazian che -->
-			0x04F6, <!-- cap Ghe with descender -->
-			0x04F7  <!-- lc ghe with descender -->
+			0x04BF  <!-- abkhazian che -->
 		</subsetting-codepoints>
 	</language>
 
@@ -218,6 +223,8 @@ v1.23 2014-03-13  Added note on sources.
 			0x0192, <!-- florin symbol (MacRoman) -->
 			0x02C9, <!-- modifier macron accent (another one) -->
 			0x03A9, <!-- Greek Omega (needed for MacRoman) -->
+			0x20BA, <!-- Turkish lira, a later addition to Unicode & Adobe Latin 3 -->
+			0x20BD, <!-- Russian ruble, a later addition to Unicode & Adobe Latin 3 -->
 			0x03C0, <!-- Greek pi (needed for MacRoman) -->
 			0x2020, <!-- dagger -->
 			0x2021, <!-- double dagger -->
@@ -288,6 +295,7 @@ v1.23 2014-03-13  Added note on sources.
 			0x20B1, <!-- peso currency sign Phillipines -->
 			0x20B2, <!-- guarani currency symbol Paraguay -->
 			0x20B5, <!-- cedi currency symbol Ghana -->
+			0x20B9, <!-- rupee currency symbol India, late addition to Unicode and AL-4 -->
 			0x2113, <!-- script small l (litre symbol) -->
 			0x2117, <!-- circle P sound recording copyright -->
 			0x2120, <!-- sm service mark sign -->
@@ -467,8 +475,11 @@ CAUTION: Bengali needs work!
 -->
 	<language name="Bengali" abbreviated-name="BENG">
 		<scanning-codepoints>
-0x0981-0x0983,0x0985-0x098C,0x098F-0x0990,0x0993-0x09A8,0x09AA-0x09B0,0x09B2,0x09B6-0x09B9,0x09BC,0x09BE-0x09C4,0x09C7,0x09C8,0x09CB-0x09CD,0x09D7,0x09DC,0x09DD,0x09DF-0x09E3,0x09E6-0x09FA
+			0x0981-0x0983,0x0985-0x098C,0x098F-0x0990,0x0993-0x09A8,0x09AA-0x09B0,0x09B2,0x09B6-0x09B9,0x09BC,0x09BE-0x09C4,0x09C7,0x09C8,0x09CB-0x09CD,0x09D7,0x09DC,0x09DD,0x09DF-0x09E3,0x09E6-0x09FA
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 	
 	<language name="Bulgarian" abbreviated-name="BGR" parent="Cyrillic">
@@ -958,7 +969,7 @@ CAUTION: Coptic needs work!
 			0x00C1,0x00C2,0x00C4,0x00C7,0x00C9,0x00CB,0x00CD,0x00CE,0x00D3,0x00D4,0x00D6,0x00DA,0x00DC,0x00DD,0x00DF,0x00E1,0x00E2,0x00E4,0x00E7,0x00E9,0x00EB,0x00ED,0x00EE,0x00F3,0x00F4,0x00F6,0x00FA,0x00FC,0x00FD,0x0102-0x0107,0x010C-0x0111,0x0118-0x011B,0x0139,0x013A,0x013D,0x013E,0x0141-0x0144,0x0147,0x0148,0x0150,0x0151,0x0154,0x0155,0x0158-0x015B,0x015E-0x0165,0x016E-0x0171,0x0179-0x017E,0x201A,0x201E
 		</scanning-codepoints>
 		<subsetting-codepoints>
-			0x00AB,0x00BB,0x2039,0x203A
+			0x00AB,0x00BB,0x2039,0x203A,0x20BA
 		</subsetting-codepoints>
 	</language>
 	
@@ -1118,6 +1129,9 @@ CAUTION: Gujarati needs work!
 		<scanning-codepoints>
 			0x0A81-0x0A83,0x0A85-0x0A8D,0x0A8F-0x0A91,0x0A93-0x0AA8,0x0AAA-0x0AB0,0x0AB2,0x0AB3,0x0AB5-0x0AB9,0x0ABC-0x0AC5,0x0AC7-0x0AC9,0x0ACB-0x0ACD,0x0AD0,0x0AE0-0x0AE3,0x0AE6-0x0AEF,0x0AF1
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 	
 <!--
@@ -1128,6 +1142,9 @@ CAUTION: Gurmukhi needs work!
 			0x0A01-0x0A03,0x0A05-0x0A0A,0x0A0F,0x0A10,0x0A13-0x0A28,0x0A2A-0x0A30,0x0A32,0x0A33,0x0A35,0x0A36,0x0A38,0x0A39,0x0A3C,0x0A3E-0x0A42,0x0A47,0x0A48,0x0A4B-0x0A4D,0x0A51,0x0A59-0x0A5C,0x0A5E,
 			0x0A66-0x0A75
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 <!--
@@ -1270,7 +1287,8 @@ CAUTION: Hong Kong Supplementary needs work!
 		</scanning-codepoints>
 		<subsetting-codepoints>
 			0x00C1,0x00C9,0x00CD,0x00D3,0x00DA,0x00E1,0x00E3,0x00E9,0x00ED,0x00FA,
-			0x0112,0x0113,0x014C,0x014D
+			0x0112,0x0113,0x014C,0x014D,
+			0x20B9
 		</subsetting-codepoints>
 	</language>
 	
@@ -1279,6 +1297,9 @@ CAUTION: Hong Kong Supplementary needs work!
 			0x00D1,0x00F1,0x0100,0x0101,0x012A,0x012B,0x015A,0x015B,0x016A,0x016B,
 			0x1E0A,0x1E0B,0x1E44,0x1E55,0x1E58,0x1E59,0x1E62,0x1E63,0x1E6C,0x1E6D
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 	<language name="Indonesian" abbreviated-name="IND" parent="English">
@@ -1346,6 +1367,9 @@ CAUTION: Kannada needs work!
 		<scanning-codepoints>
 			0x0C82,0x0C83,0x0C85-0x0C8C,0x0C8E-0x0C90,0x0C92-0x0CA8,0x0CAA-0x0CB3,0x0CB5-0x0CB9,0x0CBE-0x0CC4,0x0CC6-0x0CC8,0x0CCA-0x0CCD,0x0CD5,0x0CD6,0x0CDE,0x0CE0,0x0CE1,0x0CE6-0x0CEF
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 	<language name="KarakalpakCyrillic" abbreviated-name="KRKC" parent="Cyrillic" anglicized-name="Kara-kalpak (Cyrillic)">
@@ -1367,6 +1391,9 @@ CAUTION: Kazakh (Arabic) needs work!
 		<scanning-codepoints>
 			0x0406,0x0456,0x0492,0x0493,0x049A,0x049B,0x04A2,0x04A3,0x04AE-0x04B1,0x04BA,0x04BB,0x04D8,0x04D9,0x04E8,0x04E9
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B8
+		</subsetting-codepoints>
 	</language>
 
 	<language name="Khakas" abbreviated-name="KHA" parent="Cyrillic">
@@ -1553,6 +1580,9 @@ CAUTION: Malayalam needs work!
 		<scanning-codepoints>
 			0x0D02,0x0D03,0x0D05-0x0D0C,0x0D0E-0x0D10,0x0D12-0x0D28,0x0D2A-0x0D39,0x0D3D-0x0D44,0x0D46-0x0D48,0x0D4A-0x0D4D,0x0D57,0x0D60-0x0D63,0x0D66-0x0D75,0x0D79-0x0D7F
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 	<language name="Maltese" abbreviated-name="MTS" parent="English">
@@ -1599,12 +1629,18 @@ CAUTION: Mongolian needs work!
 		<scanning-codepoints>
 			0x1800-0x180E,0x1810-0x1819,0x1820-0x1877,0x1880-0x18AA
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20AE  <!-- Mongolian tugrik currency symbol -->
+		</subsetting-codepoints>
 	</language>
 
 	<language name="MongolianCyrillic" abbreviated-name="MNGC" parent="Cyrillic" anglicized-name="Mongolian (Cyrillic)">
 		<scanning-codepoints>
 			0x04AE,0x04AF,0x04E8,0x04E9
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20AE  <!-- Mongolian tugrik currency symbol -->
+		</subsetting-codepoints>
 	</language>
 
 <!--
@@ -1655,6 +1691,9 @@ CAUTION: Oriya needs work!
 			0x0B01-0x0B03,0x0B05-0x0B0C,0x0B0F,0x0B10,0x0B13-0x0B28,0x0B2A-0x0B30,0x0B32,0x0B33,0x0B35-0x0B39,0x0B3C-0x0B44,0x0B47,0x0B48,0x0B4B-0x0B4D,0x0B56,0x0B57,0x0B5C,0x0B5D,0x0B5F-0x0B63,
 			0x0B66-0x0B71
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 <!--
@@ -1750,14 +1789,11 @@ CAUTION: Pashto needs work!
 			0x00A9,0x00AE,
 			0x0401, <!-- Cyrillic capital io -->
 			0x0451,  <!-- Cyrillic lower case io -->
-			0x2010,0x2013-0x2015,0x2018,0x201A,0x201C,0x201E,0x2039,0x203A,0x20AC,0x2122
+			0x2010,0x2013-0x2015,0x2018,0x201A,0x201C,0x201E,0x2039,0x203A,0x20AC,0x20BD,0x2122
 		</subsetting-codepoints>
 	</language>
 
 	<language name="Serbo-CroatianCyrillic" abbreviated-name="SRCC" parent="Cyrillic" anglicized-name="Serbo-Croatian (Cyrillic)">
-		<scanning-codepoints>
-			0x0020
-		</scanning-codepoints>
 		<subsetting-codepoints>
 			0x201D
 		</subsetting-codepoints>
@@ -1789,6 +1825,9 @@ CAUTION: Sinhalese needs work!
 		<scanning-codepoints>
 			0x0D82,0x0D83,0x0D85-0x0D96,0x0D9A-0x0DB1,0x0DB3-0x0DBB,0x0DBD,0x0DC0-0x0DC6,0x0DCA,0x0DCF-0x0DD4,0x0DD6,0x0DD8-0x0DDF,0x0DF2-0x0DF4
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 	<language name="Slovak" abbreviated-name="SKY" parent="English">
@@ -1893,6 +1932,9 @@ CAUTION: Tamil needs work!
 			0x0B82,0x0B83,0x0B85-0x0B8A,0x0B8E-0x0B90,0x0B92-0x0B95,0x0B99,0x0B9A,0x0B9C,0x0B9E,0x0B9F,0x0BA3,0x0BA4,0x0BA8-0x0BAA,0x0BAE-0x0BB9,0x0BBE-0x0BC2,0x0BC6-0x0BC8,0x0BCA-0x0BCD,0x0BD0,0x0BD7,
 			0x0BE6-0x0BFA
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 
 	<language name="TatarCyrillic" abbreviated-name="TATC" parent="Cyrillic" anglicized-name="Tatar (Cyrillic)">
@@ -1918,6 +1960,9 @@ CAUTION: Telugu needs work!
 			0x0C01-0x0C03,0x0C05-0x0C0C,0x0C0E-0x0C10,0x0C12-0x0C28,0x0C2A-0x0C33,0x0C35-0x0C39,0x0C3D-0x0C44,0x0C46-0x0C48,0x0C4A-0x0C4D,0x0C55,0x0C56,0x0C58,0x0C59,0x0C60-0x0C63,0x0C66-0x0C6F,
 			0x0C78-0x0C7F
 		</scanning-codepoints>
+		<subsetting-codepoints>
+			0x20B9
+		</subsetting-codepoints>
 	</language>
 	
 <!--
